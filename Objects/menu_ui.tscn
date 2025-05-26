@@ -1,0 +1,473 @@
+[gd_scene load_steps=18 format=3 uid="uid://dihpe5i7enago"]
+
+[ext_resource type="Texture2D" uid="uid://qx3026txb4kg" path="res://Sprites/UI/9.png" id="1_4vpja"]
+[ext_resource type="Script" uid="uid://cp8guc18khjcy" path="res://Scripts/menu_ui.gd" id="1_ndxjt"]
+[ext_resource type="Texture2D" uid="uid://dk8yqc5ra6tcj" path="res://Sprites/UI/Essential Pack/UI_Flat_FrameMarker03a.png" id="2_cfmfv"]
+[ext_resource type="FontFile" uid="uid://cq0pvxj2c6vaq" path="res://Fonts/8-bit Arcade In.ttf" id="4_4lfah"]
+[ext_resource type="Texture2D" uid="uid://c2133v1y1wqy0" path="res://Sprites/UI/Essential Pack/UI_Flat_ToggleOff03a.png" id="5_kpmpa"]
+[ext_resource type="Texture2D" uid="uid://bxldlcelo45ec" path="res://Sprites/UI/Essential Pack/UI_Flat_ToggleOn03a.png" id="6_ng77s"]
+[ext_resource type="AudioStream" uid="uid://bh08eorljwgmo" path="res://Sounds/menu_select.wav" id="7_k7405"]
+[ext_resource type="Texture2D" uid="uid://cl6nsxc1k7wdd" path="res://Sprites/UI/Icon19.png" id="7_sq8ab"]
+[ext_resource type="Texture2D" uid="uid://bhwd5xlbyoffj" path="res://Sprites/UI/IconPressed19.png" id="8_10j2u"]
+[ext_resource type="Texture2D" uid="uid://b5vxrpxqgistq" path="res://Sprites/UI/Icon17.png" id="9_ud7cf"]
+[ext_resource type="Texture2D" uid="uid://c1xyedipheul8" path="res://Sprites/UI/IconPressed17.png" id="10_di3ul"]
+[ext_resource type="Texture2D" uid="uid://hgr1wye61mcv" path="res://Sprites/UI/Essential Pack/UI_Flat_Button02a_3.png" id="13_0ijtm"]
+[ext_resource type="Texture2D" uid="uid://b8baev6b7y3y8" path="res://Sprites/UI/Essential Pack/UI_Flat_ButtonCheck01a.png" id="15_tjnb5"]
+
+[sub_resource type="Animation" id="Animation_c2iid"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Menu/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_k7405"]
+resource_name = "activate"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Menu/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Menu")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"show"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_sq8ab"]
+resource_name = "disable"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Menu/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Menu")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hide"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InfoUI")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hide"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c2iid"]
+_data = {
+&"RESET": SubResource("Animation_c2iid"),
+&"activate": SubResource("Animation_k7405"),
+&"disable": SubResource("Animation_sq8ab")
+}
+
+[node name="MenuUI" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_ndxjt")
+
+[node name="PauseButton" type="TextureButton" parent="."]
+offset_left = 43.0
+offset_top = 89.0
+offset_right = 98.0
+offset_bottom = 144.0
+texture_normal = ExtResource("1_4vpja")
+stretch_mode = 4
+
+[node name="Menu" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
+
+[node name="ColorRect" type="TextureRect" parent="Menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -326.0
+offset_top = -450.5
+offset_right = 326.0
+offset_bottom = 51.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cfmfv")
+
+[node name="ColorRect2" type="TextureRect" parent="Menu/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -326.0
+offset_top = 250.0
+offset_right = 326.0
+offset_bottom = 780.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cfmfv")
+flip_v = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -264.5
+offset_top = 48.0
+offset_right = 264.5
+offset_bottom = 291.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Menu/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("4_4lfah")
+theme_override_font_sizes/font_size = 110
+text = "BEST SCORE"
+
+[node name="Label3" type="Label" parent="Menu/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("4_4lfah")
+theme_override_font_sizes/font_size = 110
+text = "0"
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="Menu/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Music" type="HSplitContainer" parent="Menu/ColorRect/VBoxContainer"]
+layout_mode = 2
+split_offset = 420
+
+[node name="Label2" type="Label" parent="Menu/ColorRect/VBoxContainer/Music"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("4_4lfah")
+theme_override_font_sizes/font_size = 110
+text = "MUSIC"
+
+[node name="ToggleMusicButton" type="TextureButton" parent="Menu/ColorRect/VBoxContainer/Music"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("6_ng77s")
+texture_pressed = ExtResource("5_kpmpa")
+stretch_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Sound" type="HSplitContainer" parent="Menu/ColorRect/VBoxContainer"]
+layout_mode = 2
+split_offset = 420
+
+[node name="Label2" type="Label" parent="Menu/ColorRect/VBoxContainer/Sound"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("4_4lfah")
+theme_override_font_sizes/font_size = 110
+text = "SOUND"
+
+[node name="ToggleSoundButton" type="TextureButton" parent="Menu/ColorRect/VBoxContainer/Sound"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("6_ng77s")
+texture_pressed = ExtResource("5_kpmpa")
+stretch_mode = 5
+
+[node name="MarginContainer2" type="MarginContainer" parent="Menu/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="RandomBackground" type="HSplitContainer" parent="Menu/ColorRect/VBoxContainer"]
+layout_mode = 2
+split_offset = 420
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/ColorRect/VBoxContainer/RandomBackground"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Menu/ColorRect/VBoxContainer/RandomBackground/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("4_4lfah")
+theme_override_font_sizes/font_size = 90
+text = "RANDOM"
+
+[node name="Label3" type="Label" parent="Menu/ColorRect/VBoxContainer/RandomBackground/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("4_4lfah")
+theme_override_font_sizes/font_size = 90
+text = "BACKGROND"
+
+[node name="ToggleRandomBackgroundButton" type="TextureButton" parent="Menu/ColorRect/VBoxContainer/RandomBackground"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("6_ng77s")
+texture_pressed = ExtResource("5_kpmpa")
+stretch_mode = 5
+
+[node name="MarginContainer4" type="MarginContainer" parent="Menu/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/ColorRect/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GitHubButton" type="TextureButton" parent="Menu/ColorRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+texture_normal = ExtResource("7_sq8ab")
+texture_pressed = ExtResource("8_10j2u")
+stretch_mode = 4
+
+[node name="MarginContainer4" type="MarginContainer" parent="Menu/ColorRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="ItchButton" type="TextureButton" parent="Menu/ColorRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+texture_normal = ExtResource("9_ud7cf")
+texture_pressed = ExtResource("10_di3ul")
+stretch_mode = 4
+
+[node name="MarginContainer5" type="MarginContainer" parent="Menu/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Menu/ColorRect/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("4_4lfah")
+theme_override_font_sizes/font_size = 110
+text = "INFO"
+
+[node name="MarginContainer5" type="MarginContainer" parent="Menu/ColorRect/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+
+[node name="InfoButton" type="TextureButton" parent="Menu/ColorRect/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("13_0ijtm")
+stretch_mode = 4
+
+[node name="Label2" type="Label" parent="Menu/ColorRect/VBoxContainer/HBoxContainer2/InfoButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -73.0
+offset_right = 14.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("4_4lfah")
+theme_override_font_sizes/font_size = 110
+text = "I"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SelectSound" type="AudioStreamPlayer2D" parent="Menu"]
+stream = ExtResource("7_k7405")
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_c2iid")
+}
+
+[node name="InfoUI" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
+
+[node name="ColorRect" type="TextureRect" parent="InfoUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -326.0
+offset_top = -450.5
+offset_right = 326.0
+offset_bottom = 51.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cfmfv")
+
+[node name="ColorRect2" type="TextureRect" parent="InfoUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -326.0
+offset_top = 250.0
+offset_right = 326.0
+offset_bottom = 780.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cfmfv")
+flip_v = true
+
+[node name="OkButton" type="TextureButton" parent="InfoUI/ColorRect/ColorRect2"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -129.0
+offset_top = -142.0
+offset_right = -37.0
+offset_bottom = -58.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("15_tjnb5")
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -264.5
+offset_top = 48.0
+offset_right = 264.5
+offset_bottom = 291.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="InfoUI/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("4_4lfah")
+theme_override_font_sizes/font_size = 110
+text = "INFO"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="InfoUI/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(120, 400)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("4_4lfah")
+theme_override_font_sizes/font_size = 60
+text = "This game is inspired by the game \"Flappy bird\", all credits to Dong Nguyen"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="InfoUI/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(120, 200)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("4_4lfah")
+theme_override_font_sizes/font_size = 60
+text = "Project under the GNU General Public license v3.0"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="Menu/ColorRect/VBoxContainer/Music/ToggleMusicButton" to="." method="_on_toggle_music_button_pressed"]
+[connection signal="pressed" from="Menu/ColorRect/VBoxContainer/Sound/ToggleSoundButton" to="." method="_on_toggle_sound_button_pressed"]
+[connection signal="pressed" from="Menu/ColorRect/VBoxContainer/RandomBackground/ToggleRandomBackgroundButton" to="." method="_on_toggle_random_background_button_pressed"]
+[connection signal="pressed" from="Menu/ColorRect/VBoxContainer/HBoxContainer/GitHubButton" to="." method="_on_git_hub_button_pressed"]
+[connection signal="pressed" from="Menu/ColorRect/VBoxContainer/HBoxContainer/ItchButton" to="." method="_on_itch_button_pressed"]
+[connection signal="pressed" from="Menu/ColorRect/VBoxContainer/HBoxContainer2/InfoButton" to="." method="_on_info_button_pressed"]
+[connection signal="pressed" from="InfoUI/ColorRect/ColorRect2/OkButton" to="." method="_on_ok_button_pressed"]

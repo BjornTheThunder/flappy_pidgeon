@@ -1,0 +1,154 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbanlffo3r05j"]
+
+[ext_resource type="Texture2D" uid="uid://q7djjnko5jf3" path="res://Sprites/UI/hand.png" id="1_yxn5m"]
+[ext_resource type="Texture2D" uid="uid://us4g7kqle3ke" path="res://Sprites/UI/tap_1.png" id="2_vsvl0"]
+[ext_resource type="Texture2D" uid="uid://bjvbp71eufyhf" path="res://Sprites/UI/tap_2.png" id="3_3yx2j"]
+
+[sub_resource type="Animation" id="Animation_2a7oo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/Point:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(116, -18)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect/TapLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -7)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect/TapLeft2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(201, -7)]
+}
+
+[sub_resource type="Animation" id="Animation_3yx2j"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/Point:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(116, -18), Vector2(116, -8), Vector2(116, -18)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect/TapLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -7), Vector2(-20, -7), Vector2(0, -7)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect/TapLeft2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(201, -7), Vector2(221, -7), Vector2(201, -7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2a7oo"]
+_data = {
+&"RESET": SubResource("Animation_2a7oo"),
+&"new_animation": SubResource("Animation_3yx2j")
+}
+
+[node name="TutorialUI" type="CanvasLayer"]
+offset = Vector2(0, 30)
+transform = Transform2D(1, 0, 0, 1, 0, 30)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.0
+offset_top = 40.5
+offset_right = 153.0
+offset_bottom = 75.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Point" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -35.5
+offset_right = 36.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_yxn5m")
+
+[node name="TapLeft" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -24.5
+offset_right = 103.0
+offset_bottom = 24.5
+grow_vertical = 2
+texture = ExtResource("2_vsvl0")
+
+[node name="TapLeft2" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -24.5
+offset_bottom = 24.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("3_3yx2j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2a7oo")
+}
+autoplay = "new_animation"

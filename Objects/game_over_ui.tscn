@@ -1,0 +1,384 @@
+[gd_scene load_steps=13 format=3 uid="uid://rscxba2643uh"]
+
+[ext_resource type="Script" uid="uid://dooiepempuvrv" path="res://Scripts/game_over_ui.gd" id="1_kshke"]
+[ext_resource type="Texture2D" uid="uid://bxi00hcjxu5uv" path="res://Sprites/UI/Essential Pack/UI_Flat_Frame03a.png" id="3_nqhkr"]
+[ext_resource type="Texture2D" uid="uid://b8baev6b7y3y8" path="res://Sprites/UI/Essential Pack/UI_Flat_ButtonCheck01a.png" id="4_u8si8"]
+[ext_resource type="AudioStream" uid="uid://bh08eorljwgmo" path="res://Sounds/menu_select.wav" id="5_nqhkr"]
+[ext_resource type="FontFile" uid="uid://cq0pvxj2c6vaq" path="res://Fonts/8-bit Arcade In.ttf" id="5_u8si8"]
+[ext_resource type="AudioStream" uid="uid://btv4ikjl883o" path="res://Sounds/point_sound_score.wav" id="6_u8si8"]
+[ext_resource type="AudioStream" uid="uid://coc3ihmrotsde" path="res://Sounds/Jingle_Achievement_00.wav" id="7_t64t6"]
+
+[sub_resource type="Animation" id="Animation_u8si8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-138, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect/ScoreShowUI:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-61, 202)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect/ContinueButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(177.5, 647)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect/ScoreShowUI/Label/ScoreLabel:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nqhkr"]
+resource_name = "new_animation"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-1200, 0), Vector2(-70, 0), Vector2(-138, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect/ScoreShowUI:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 0.8, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-61, 1200), Vector2(-61, 146), Vector2(-61, 202)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect/ContinueButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6, 1, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(177.5, 1600), Vector2(177.5, 541), Vector2(177.5, 647)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_score_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_t64t6"]
+resource_name = "score_animation"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/ScoreShowUI/Label/ScoreLabel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u8si8"]
+_data = {
+&"RESET": SubResource("Animation_u8si8"),
+&"new_animation": SubResource("Animation_nqhkr"),
+&"score_animation": SubResource("Animation_t64t6")
+}
+
+[sub_resource type="Gradient" id="Gradient_u8si8"]
+offsets = PackedFloat32Array(0, 0.18, 0.446667, 0.673333, 0.813333, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0.939641, 0.510459, 3.85046e-07, 1, 5.39064e-06, 0.634136, 0.915364, 1, 0.416809, 1, 0.320599, 1, 1, 0.831373, 0, 1, 1, 0, 1, 1)
+
+[node name="GameOverUI" type="CanvasLayer"]
+script = ExtResource("1_kshke")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -251.0
+offset_top = -323.5
+offset_right = 251.0
+offset_bottom = 458.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -389.0
+offset_right = 382.0
+offset_bottom = 137.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.529412, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("5_u8si8")
+theme_override_font_sizes/font_size = 140
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreShowUI" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -312.0
+offset_top = -189.0
+offset_right = 311.0
+offset_bottom = 189.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_nqhkr")
+
+[node name="Label" type="Label" parent="ColorRect/ScoreShowUI"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 98.0
+offset_right = 297.0
+offset_bottom = 165.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("5_u8si8")
+theme_override_font_sizes/font_size = 100
+text = "SCORE"
+
+[node name="ScoreLabel" type="Label" parent="ColorRect/ScoreShowUI/Label"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -6.0
+offset_right = 125.0
+offset_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("5_u8si8")
+theme_override_font_sizes/font_size = 140
+text = "0"
+
+[node name="Label2" type="Label" parent="ColorRect/ScoreShowUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -273.0
+offset_top = 99.0
+offset_right = -23.0
+offset_bottom = 166.0
+grow_horizontal = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("5_u8si8")
+theme_override_font_sizes/font_size = 100
+text = "BEST"
+
+[node name="BestScoreLabel" type="Label" parent="ColorRect/ScoreShowUI/Label2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -4.0
+offset_right = 125.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("5_u8si8")
+theme_override_font_sizes/font_size = 140
+text = "0"
+
+[node name="ContinueButton" type="TextureButton" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -73.5
+offset_top = -135.0
+offset_right = 73.5
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("4_u8si8")
+stretch_mode = 4
+
+[node name="SelectSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_nqhkr")
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_u8si8")
+}
+
+[node name="ScoreSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_u8si8")
+bus = &"SFX"
+
+[node name="ConfettiParticles" type="CPUParticles2D" parent="."]
+position = Vector2(15, 1290)
+rotation = -1.17503
+emitting = false
+amount = 60
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+randomness = 0.44
+lifetime_randomness = 0.52
+emission_shape = 1
+emission_sphere_radius = 10.0
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+color_ramp = SubResource("Gradient_u8si8")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[node name="ConfettiParticles3" type="CPUParticles2D" parent="."]
+position = Vector2(-13, -18.9999)
+rotation = 0.687463
+emitting = false
+amount = 60
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+randomness = 0.44
+lifetime_randomness = 0.52
+emission_shape = 1
+emission_sphere_radius = 10.0
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+color_ramp = SubResource("Gradient_u8si8")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[node name="ConfettiParticles4" type="CPUParticles2D" parent="."]
+position = Vector2(742, -24)
+rotation = 2.56455
+emitting = false
+amount = 60
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+randomness = 0.44
+lifetime_randomness = 0.52
+emission_shape = 1
+emission_sphere_radius = 10.0
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+color_ramp = SubResource("Gradient_u8si8")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[node name="ConfettiParticles2" type="CPUParticles2D" parent="."]
+position = Vector2(715, 1291)
+rotation = -2.03794
+emitting = false
+amount = 60
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+randomness = 0.44
+lifetime_randomness = 0.52
+emission_shape = 1
+emission_sphere_radius = 10.0
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+color_ramp = SubResource("Gradient_u8si8")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[node name="ApplauseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_t64t6")
+bus = &"SFX"
+
+[connection signal="pressed" from="ColorRect/ContinueButton" to="." method="_on_continue_button_pressed"]
